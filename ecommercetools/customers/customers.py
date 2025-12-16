@@ -208,7 +208,7 @@ def get_abc_segments(customers,
     lapsed = customers[customers['recency'] > (months * 30)]
 
     # Return ABC segments
-    abc = purchased.append(lapsed)
+    abc = pd.concat([purchased, lapsed], ignore_index=False)
     abc[abc_class_name].fillna('D', inplace=True)
     abc[abc_rank_name].fillna(len(purchased) + 1, inplace=True)
     abc = abc[['customer_id', abc_class_name, abc_rank_name]]
